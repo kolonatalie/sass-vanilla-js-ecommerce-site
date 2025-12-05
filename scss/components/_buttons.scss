@@ -1,0 +1,192 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+/*
+---------------
+Main Btn
+---------------
+*/
+
+.main-btn {
+  display: inline-block;
+  background-color: $color-accent;
+  color: $color-bg;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-text-md;
+  padding: $space-sm $space-default;
+  border-radius: $border-radius-md;
+  transition: background-color $transition-default, transform $transition-default, box-shadow $transition-default;
+
+  &:hover,
+  &:active {
+    background-color: $color-primary;
+    transform: translateY(-$space-xs);
+    box-shadow: 0 1rem 1.25rem -0.75rem $color-primary;
+  }
+
+  @include screen(tablet) {
+    font-size: $font-size-text-lg;
+  }
+}
+
+.form-btn {
+  color: $color-bg;
+  background-color: $color-accent;
+  font-family: $font-secondary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-accent-sm;
+  text-transform: uppercase;
+  padding: $space-sm $space-default;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: background-color $transition-default, transform $transition-default, box-shadow $transition-default;
+
+  &:hover,
+  &:active {
+    background-color: $color-primary;
+    transform: translateY(-$space-xs);
+    box-shadow: 0 1rem 1.25rem -0.75rem $color-primary,
+      inset 0 0 0 1px $color-secondary;
+  }
+}
+
+/*
+---------------
+Back To Top Btn
+---------------
+*/
+
+#back-to-top {
+  position: fixed;
+  bottom: $space-default;
+  right: $space-xs;
+  background-color: $color-accent;
+  color: $color-bg;
+  border: none;
+  border-radius: 50%;
+  width: $icon-xl;
+  height: $icon-xl;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: $shadow-md $color-shadow;
+  transition: opacity $transition-default;
+  opacity: 0.5;
+  z-index: 999;
+}
+
+#back-to-top:hover {
+  opacity: 1;
+}
+
+/*
+---------------
+Add To Cart Btn
+---------------
+*/
+
+.add-to-cart-btn {
+  display: inline-block;
+  background-color: $color-accent;
+  color: $color-bg;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-text-md;
+  width: $btn-add-width;
+  height: $space-xxl;
+  border-radius: $border-radius-md;
+  transition: background-color $transition-default, transform $transition-default, box-shadow $transition-default;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-primary;
+    transform: translateY(-$space-xs);
+    box-shadow: 0 1rem 1.25rem -0.75rem $color-primary,
+      inset 0 0 0 1px $color-secondary;
+  }
+
+  @include screen(tablet) {
+    font-size: $font-size-text-lg;
+  }
+}
+
+.add-to-cart-btn.added {
+  background-color: $color-success;
+
+  &::before {
+    content: '\2713';
+    margin-right: $space-xs;
+    font-weight: $font-weight-bold;
+  }
+}
+
+/*
+---------------
+Sale Badge
+---------------
+*/
+
+.sale-badge {
+  position: absolute;
+  top: $space-sm;
+  left: $space-sm;
+  background-color: $color-yellow;
+  color: $color-bg;
+  font-weight: $font-weight-bold;
+  padding: $space-xxs $space-sm;
+  font-size: $font-size-accent-sm;
+  text-transform: uppercase;
+  border-radius: $border-radius-sm;
+}
+
+.hidden {
+  display: none;
+}
+
+/*
+---------------
+Toast
+---------------
+*/
+
+#toast-container {
+  position: fixed;
+  bottom: $space-md;
+  left: $space-md;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: $space-xs;
+}
+
+.toast {
+  padding: $space-sm $space-md;
+  border-radius: $border-radius;
+  color: $color-bg;
+  font-size: $font-size-text-sm;
+  font-weight: $font-weight-bold;
+  box-shadow: $shadow-lg $color-shadow;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all $transition-slow;
+
+}
+
+.toast.error {
+  @include glass-bg($color-error, 0.75rem, 0.9);
+}
+
+.toast.success {
+  @include glass-bg($color-success, 0.75rem, 0.9);
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dev-link {
+  color: $color-accent;
+}

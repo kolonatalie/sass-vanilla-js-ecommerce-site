@@ -1,0 +1,78 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+/*
+---------------
+Product Card
+---------------
+*/
+
+.product-card {
+  position: relative;
+  text-align: center;
+  max-width: $product-card-width;
+  width: 100%;
+
+  @include flex-center(column, space-between, center);
+
+  margin-bottom: $space-lg;
+}
+
+.product-image-container {
+  overflow: hidden;
+  transition: transform $transition-default, box-shadow $transition-default;
+  box-shadow: 0 $space-xxs $space-xs $color-shadow;
+  margin-bottom: $space-lg;
+  border-radius: $border-radius-sm;
+
+  &:hover {
+    box-shadow: 0 $space-lg $space-sm (
+      -$space-sm) $color-shadow;
+    transform: translateY(-$space-xxs
+  );
+  }
+}
+
+.product-card-image {
+  width: 100%;
+  aspect-ratio: 5/6;
+  object-fit: cover;
+}
+
+.product-info {
+  @include flex-center(column, space-between, center);
+
+  min-height: $product-card-info-height;
+  margin-bottom: $space-lg;
+
+  .product-title {
+    @include carousel-text($font-weight-medium);
+
+    line-height: 1.3;
+    text-wrap: wrap;
+
+    // margin-bottom: $space-md;
+    transition: color $transition-default;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  p:last-child {
+    @include carousel-text($font-weight-bold);
+
+    line-height: 1;
+  }
+}
+
+.product-info.in-catalog {
+  @include screen(desktop) {
+    height: $section-spacing-lg;
+    transition: height $transition-smooth;
+  }
+
+  @include screen(wide) {
+    height: $product-card-info-height;
+  }
+}

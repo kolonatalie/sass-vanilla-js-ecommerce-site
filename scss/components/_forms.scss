@@ -1,0 +1,326 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+/*
+---------------
+Contact Form
+---------------
+*/
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: $space-default;
+  position: relative;
+}
+
+.form-group.message {
+  margin-bottom: $space-lg;
+}
+
+form label {
+  font-weight: $font-weight-bold;
+}
+
+label:has(~ input[required])::after {
+  content: '*';
+  color: $color-accent;
+  margin-left: $space-xxs;
+  font-size: $font-size-text-xl;
+  font-weight: $font-weight-bold;
+}
+
+.form-group:focus-within label {
+  color: $color-accent;
+  transition: color $transition-default;
+}
+
+form input,
+form textarea {
+  background-color: transparent;
+  border: 1px solid rgba($color-accent, 0.4);
+  padding: $space-xs $space-sm;
+}
+
+form textarea {
+  min-width: $form-textarea-md;
+  max-width: $form-textarea-lg;
+  min-height: $form-textarea-sm;
+  max-height: $form-textarea-md;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border: 1px solid $color-accent;
+  transition: all $transition-default;
+}
+
+form button {
+  align-self: self-start;
+  color: $color-accent;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: $color-grey;
+  font-size: $font-size-text-md;
+  font-family: $font-primary;
+  opacity: 0.7;
+}
+
+form input:focus::placeholder,
+form textarea:focus::placeholder {
+  opacity: 0;
+  transition: opacity $transition-default;
+}
+
+/*
+---------------
+Modal Log In
+---------------
+*/
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  transition: all $transition-default;
+  opacity: 0;
+  z-index: -10;
+
+  @include glass-bg($color-bg, 1rem, 0.5);
+}
+
+.open-modal {
+  opacity: 1;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: $color-bg;
+  border-radius: $border-radius-sm;
+  box-shadow: $shadow-md $color-shadow;
+  width: $container-width-md;
+  height: auto;
+  max-width: $card-lg-width;
+  position: relative;
+  padding: $space-xl $space-lg;
+  transition: box-shadow $transition-default, background $transition-default;
+
+  &:hover,
+  &:active {
+    box-shadow: $shadow-lg $color-shadow;
+    background: $color-bg;
+  }
+
+  @include screen(tablet) {
+    padding: $section-spacing-sm;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: $space-sm;
+  right: $space-xs;
+  background: transparent;
+  border-color: transparent;
+  color: $color-primary;
+  cursor: pointer;
+
+  @include icon-base($icon-lg);
+
+  transition: color $transition-default, transform $transition-default;
+
+  @include icon-hover-effect(1.3);
+
+  @include screen(tablet) {
+    top: $space-default;
+    right: $space-lg;
+  }
+}
+
+.login-info {
+  @include flex-center(row, space-between, center);
+
+  margin-bottom: $space-default;
+  font-size: $font-size-accent-sm;
+}
+
+.login-btn {
+  width: 100%;
+}
+
+.forgot-password {
+  font-weight: $font-weight-bold;
+  color: $color-accent;
+
+  @include link-hover-effect;
+}
+
+.password-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  input[type="password"],
+  input[type="text"] {
+    flex-grow: 1;
+  }
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: $space-xs;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: rgba($color-grey, 0.7);
+  transition: color $transition-default;
+
+  @include icon-base($icon-md);
+}
+
+.toggle-password:hover,
+.toggle-password:active {
+  color: $color-primary;
+}
+
+.remember-me {
+  font-weight: $font-weight-regular;
+  display: flex;
+  gap: $space-xs;
+}
+
+.remember-me input[type="checkbox"] {
+  appearance: none;
+  width: $icon-sm;
+  height: $icon-sm;
+  border: 1px solid $color-grey;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition: all $transition-fast;
+  padding: 0;
+}
+
+.remember-me input[type="checkbox"]::before {
+  content: "";
+  width: $space-xs;
+  height: $space-xs;
+  transform: scale(0);
+  transition: transform $transition-fast;
+  background: $color-primary;
+}
+
+.remember-me input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+  border: 1px solid $color-error;
+}
+
+.error-message {
+  color: $color-error;
+  font-size: $font-size-text-xs;
+  margin-top: $space-xs;
+  display: none;
+  transition: opacity $transition-default;
+  opacity: 0;
+}
+
+.form-group input.invalid-input {
+  border-color: $color-error;
+}
+
+.error-message.show {
+  display: block;
+  opacity: 1;
+  position: absolute;
+  top: 100%;
+  transform: translateY(-30%);
+  line-height: 1;
+}
+
+/*
+---------------
+Thank You Messages
+---------------
+*/
+
+.thank-you-message {
+  padding: $space-xl 0;
+  text-align: center;
+  height: 100%;
+}
+
+.thank-you-message h2 {
+  margin-bottom: $space-md;
+  color: $color-accent;
+}
+
+.thank-you-gif {
+  margin: 0 auto;
+  box-shadow: $shadow-lg $color-shadow;
+}
+
+/*
+---------------
+Modal Overlays
+---------------
+*/
+
+#thank-you-modal-overlay,
+#confirm-clear-modal-overlay {
+  @include flex-center(column, center, center);
+
+  gap: $space-default;
+  text-align: center;
+
+  h2 {
+    color: $color-accent;
+  }
+}
+
+.modal-actions {
+  margin: $space-default 0;
+  cursor: pointer;
+}
+
+#confirm-yes-btn {
+  background: transparent;
+  border: 1px solid $color-accent;
+  color: $color-accent;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-accent;
+    color: $color-bg;
+    border: none;
+  }
+}
+
+#reset-password-form {
+  p {
+    margin-bottom: $space-sm;
+  }
+}
+
+.back-to-login {
+  margin-top: $space-sm;
+}

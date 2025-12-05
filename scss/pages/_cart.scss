@@ -1,0 +1,318 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+/*
+=============== 
+Cart
+===============
+*/
+
+.hero.cart {
+  margin-bottom: $space-default;
+
+  @include screen(tablet) {
+    margin-bottom: $section-spacing-md;
+  }
+}
+
+.content.cart {
+  padding: $section-spacing-md 0;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.cart-page-template {
+  @include flex-center(column, space-between);
+  @include content;
+
+  margin: 0 auto;
+}
+
+.cart-content-wrapper {
+  @include flex-center(column);
+
+  margin-bottom: $section-spacing-sm;
+}
+
+.cart-empty-message {
+  padding: 0 $space-sm;
+  text-align: center;
+  color: $color-grey;
+
+  img {
+    margin-bottom: $space-md;
+  }
+
+  a {
+    margin-top: $space-default;
+  }
+}
+
+.empty-cart-title {
+  font-weight: $font-weight-black;
+  font-size: $font-size-h3;
+}
+
+.cart-header,
+.cart-items-container {
+  padding: 0 $space-md;
+
+  @include screen(tablet) {
+    padding: 0;
+
+    @include content;
+  }
+}
+
+.cart-header,
+.cart-item {
+  @include cart-grid-base;
+
+  grid-template-columns: 1fr 3fr 1fr;
+  column-gap: $space-sm;
+
+  @include screen(tablet) {
+    grid-template-columns: 1fr 2fr repeat(4, 1fr);
+    gap: 0;
+  }
+}
+
+.cart-header {
+  display: none;
+
+  @include screen(tablet) {
+    display: grid;
+    background-color: $color-secondary;
+    color: $color-bg;
+    text-transform: uppercase;
+    padding: $space-sm;
+  }
+}
+
+.cart-item {
+  grid-template-rows: auto repeat(2, 1fr);
+  padding: $space-xs;
+  min-height: $flex-col;
+  border: 1px solid $color-shadow;
+  border-radius: $border-radius;
+  margin-bottom: $space-md;
+
+  @include screen(tablet) {
+    grid-template-rows: 1fr;
+    border: none;
+    border-bottom: 1px solid $color-accent;
+    border-radius: 0;
+    padding: $space-lg 0;
+  }
+}
+
+.cart-item-image {
+  grid-area: 1 / 1 / 4 / 2;
+  object-fit: cover;
+  align-self: self-start;
+
+  @include screen(tablet) {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: $icon-thumbnail;
+    height: $icon-thumbnail;
+    display: block;
+    object-fit: contain;
+    align-self: center;
+  }
+}
+
+.cart-item-name {
+  grid-area: 1 / 2 / 2 / 3;
+  justify-self: flex-start;
+
+  @include screen(tablet) {
+    grid-column: 2/3;
+  }
+}
+
+.cart-item-price {
+  grid-area: 2 / 2 / 3 / 3;
+  justify-self: flex-start;
+  font-size: $font-size-base;
+  color: $color-grey;
+
+  @include screen(tablet) {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    justify-self: center;
+    color: $color-primary;
+    font-size: $font-size-text-md;
+  }
+}
+
+.cart-quantity-controls {
+  grid-area: 3 / 2 / 4 / 3;
+  justify-self: flex-start;
+
+  @include screen(tablet) {
+    grid-column: 4/5;
+    grid-row: 1/2;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  >button {
+    background: transparent;
+    transition: color $transition-default;
+    font-size: $font-size-h4;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+
+    @include icon-hover-effect(1.2);
+  }
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.cart-item-total {
+  grid-area: 3 / 3 / 4 / 4;
+
+  @include screen(tablet) {
+    grid-column: 5/6;
+    grid-row: 1/2;
+  }
+}
+
+.qty-input {
+  width: 40px;
+  text-align: center;
+  font-size: $font-size-text-xxl;
+  font-weight: $font-weight-bold;
+  border: none;
+  appearance: textfield;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.cart-item-delete {
+  grid-area: 1 / 3 / 2 / 4;
+  background: none;
+  border: none;
+  color: $color-accent;
+  cursor: pointer;
+
+  @include icon-hover-effect(0.8);
+
+  .trash {
+    @include icon-base($icon-md);
+  }
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  @include screen(tablet) {
+    grid-column: 6/7;
+    grid-row: 1/2;
+  }
+}
+
+.cart-totals-container {
+  @include flex-center(column);
+
+  width: 100%;
+  min-height: $card-min-width;
+  margin-bottom: $section-spacing-lg;
+
+  @include screen(tablet) {
+    @include flex-center(row-reverse, space-between, start);
+
+    padding: 0 $space-md;
+    transition: padding $transition-smooth;
+  }
+
+  @include screen(wide) {
+    padding: 0;
+  }
+}
+
+.cart-main-totals {
+  background: linear-gradient($color-secondary, $color-light-grey);
+  color: $color-bg;
+  padding: $space-lg;
+  width: 100%;
+  max-width: $card-lg-width;
+  margin-bottom: $section-spacing-sm;
+
+  button {
+    width: 100%;
+  }
+
+  @include screen(tablet) {
+    padding: $space-xl;
+    margin-bottom: 0;
+
+    button {
+      max-width: $form-textarea-sm;
+    }
+  }
+}
+
+.cart-total-line {
+  display: flex;
+  justify-content: space-between;
+  padding: $space-sm 0 $space-md;
+  border-bottom: 1px solid $color-accent;
+  font-size: $font-size-text-md;
+  font-weight: $font-weight-bold;
+}
+
+.final-total {
+  font-size: $font-size-h4;
+  border-bottom: none;
+  padding-top: $space-sm;
+  margin-bottom: $space-default;
+}
+
+.cart-buttons {
+  @include flex-center(column-reverse);
+
+  gap: $space-md;
+  width: 100%;
+  text-transform: uppercase;
+  text-align: center;
+
+  .main-btn {
+    width: 100%;
+    max-width: $card-lg-width;
+    font-size: $font-size-text-sm;
+  }
+
+  @include screen(tablet) {
+    @include flex-center(row, flex-start, center);
+
+    flex-wrap: wrap;
+
+    .main-btn {
+      width: $main-btn-width;
+    }
+  }
+}
+
+#clear-cart-btn {
+  text-transform: uppercase;
+}
+
+.modal-content.small-modal {
+  background-color: $color-bg;
+  padding: $section-spacing-lg;
+  box-shadow: $shadow-lg $color-shadow;
+  border-radius: $border-radius;
+}

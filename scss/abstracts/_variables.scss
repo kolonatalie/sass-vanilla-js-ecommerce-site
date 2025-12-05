@@ -1,0 +1,122 @@
+// Color
+$color-primary: #000;
+$color-secondary: #6c6c6c;
+$color-accent: #a95b36;
+$color-yellow: #e1b908;
+$color-bg: #fff;
+$color-grey: #727174;
+$color-light-grey: #cedadb;
+$color-shadow: #bac5cc;
+$color-success: #18a97b;
+$color-error: #b9273f;
+
+// Typography
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Helvetica Neue', arial, sans-serif;
+$font-accent: 'Inter', sans-serif;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+$font-size-hero: clamp(8rem, 15vw, 14rem); // 223px 
+$font-size-h1: 3.125rem; // 50px
+$font-size-h2: 2.5rem; // 40px
+$font-size-h3: 1.875rem; // 30px
+$font-size-h4: 1.56rem; // 25px
+$font-size-h5: 1.375rem; // 22px
+
+$font-size-text-xxl: 1.25rem; // 20px
+$font-size-text-xl: 1.19rem; // 19px
+$font-size-text-lg: 1.125rem; // 18px
+$font-size-text-md: 1.06rem; // 17px
+$font-size-base: 16px;
+$font-size-text-sm: 0.94rem; // 15px
+$font-size-text-xs: 0.875rem; // 14px
+
+$font-size-accent: 0.8rem; // 13px
+$font-size-accent-sm: 0.75rem; // 12px
+$font-size-accent-xs: 0.7rem; // 11px
+$font-size-accent-xxs: 0.55rem; // 9px
+
+$form-textarea-sm: 12.5rem; // 200px
+$form-textarea-md: 20rem; // 320px
+$form-textarea-lg: 40rem; // 635px
+
+
+$max-width-content: 1300px;
+$nav-offset-mobile: 4.8rem;
+$nav-col-left: 10%;
+$nav-col-right: 5rem;
+$container-width: 80%;
+$container-width-md: 90%;
+$container-width-lg: 95%;
+$container-products-width: 56.25rem; // 900px
+
+$flex-col-sm: 30%;
+$flex-col: 6.25rem; // 100px
+$flex-col-md: 13.125rem; // 210px
+
+$card-min-width: 18.75rem; // 300px
+$card-lg-width: 31.25rem; // 500px
+
+$product-card-width: 295px;
+$product-card-info-height: 6.5rem;
+$image-lg: 32rem; // 512px
+$hero-image-mobile-width: 60%;
+$icon-sm: 1.25rem; // 20px
+$icon-md: 1.55rem; // 25px
+$icon-lg: 1.875rem; // 30px
+$icon-default: 2.5rem; // 40px
+$icon-xl: 3.125rem; // 50px
+$icon-xxl: 5rem; // 80px
+$icon-thumbnail: 5.625rem; // 90px
+
+$btn-add-width: 9.375rem;
+$main-btn-width: 15.625rem;
+$hide-btn-height: 3.75rem;
+$stars-spacing: 0.06rem;
+$star-unit: 1rem;
+$space-xxs: 0.25rem; // 4px
+$space-xs: 0.5rem; // 8px
+$space-sm: 1rem; // 16px
+$space-md: 1.25rem; // 20px
+$space-lg: 1.5rem; // 24px
+$space-default: 2rem; // 32px
+$space-xl: 2.5rem; // 40px
+$space-xxl: 3rem; // 48px
+
+$section-spacing-sm: 4rem; // 64px
+$section-spacing-md: 6.25rem; // 100px
+$section-spacing-lg: 8rem; // 128px
+
+$responsive-space-mobile: clamp($space-lg, 8vw, $section-spacing-sm);
+$responsive-space-tablet: clamp($space-md, 4vw, $section-spacing-sm);
+$responsive-space-desktop: clamp($space-md, 6vw, $section-spacing-md);
+$border-radius-sm: 0.25rem;
+$border-radius: 0.5rem;
+$border-radius-sm: 1rem;
+$border-radius-md: 2rem;
+$shadow-md: 0 0 1rem;
+$shadow-lg: 0 0 5rem;
+$image-dark-overlay: brightness(0.5);
+$transition-fast: 0.2s ease;
+$transition-default: 0.3s ease;
+$transition-slow: 0.5s ease;
+$transition-smooth: 1s ease-in-out;
+
+// Toggles
+$burger-bar-middle: 0.7;
+$burger-bar-short: 0.4;
+$burger-bar-height: 0.12rem;
+$burger-bar-radius: 0.1rem;
+$burger-color: $color-primary;
+$switch-height: 1.5em;
+$switch-width: 3rem;
+$switch-thumb-size: 1rem;
+$switch-space-thumb: calc($switch-thumb-size / 4);
+
+// Z-index scale
+$z-base: 10;
+$z-header: 100;
+$z-dropdown: 200;
+$z-modal: 1000;

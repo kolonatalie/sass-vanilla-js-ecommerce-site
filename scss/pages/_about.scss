@@ -1,0 +1,825 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+/*
+=============== 
+Home Page
+===============
+*/
+
+main {
+  section {
+    &>p {
+      @include default-text;
+
+      margin-bottom: $space-xxl;
+    }
+  }
+}
+
+.hero {
+  margin-bottom: $section-spacing-md;
+
+  @include screen(tablet) {
+    margin-bottom: $section-spacing-lg;
+  }
+}
+
+.hero-banner {
+  background-image: linear-gradient(to top, 
+  $color-bg 35%, 
+  rgba(0, 0, 0, 0)),
+    url("../assets/images/banners/hero-home-banner.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.content-hero {
+  @include content;
+
+  margin: 0 auto (-$space-xxl);
+
+  @include flex-center(column, start);
+
+  overflow: hidden;
+  position: relative;
+  padding: $section-spacing-sm $space-lg $section-spacing-lg;
+
+  img {
+    width: $hero-image-mobile-width;
+    height: auto;
+    margin-bottom: $space-xxl;
+    position: relative;
+    opacity: 0;
+
+    @include hero-fade-in-animation;
+  }
+
+  @include screen(tablet) {
+    flex-direction: row-reverse;
+    justify-content: center;
+    padding: $section-spacing-lg $space-lg calc($section-spacing-md * 2);
+    margin-bottom: -$section-spacing-md;
+
+    img {
+      flex-basis: 50%;
+      max-width: $image-lg;
+      width: 50%;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.cta-hero {
+  h1 {
+    margin-bottom: $space-default;
+  }
+
+  p {
+    @include default-text;
+
+    text-wrap: balance;
+  }
+
+  @include screen(tablet) {
+    p {
+      width: $container-width;
+      text-wrap: wrap;
+    }
+  }
+}
+
+.discount-box {
+  background-color: $color-bg;
+  box-shadow: $shadow-lg $color-shadow;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  width: $container-width-md;
+  max-width: $card-lg-width;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  h2 {
+    margin-bottom: $space-xl;
+  }
+
+  @include screen(tablet) {
+    @include content;
+
+    grid-template-columns: minmax($card-min-width, 1fr) minmax($card-min-width, 1fr);
+    align-items: center;
+    width: $container-width-lg;
+  }
+}
+
+.left-card {
+  padding: $section-spacing-sm $responsive-space-mobile;
+
+  @include screen(tablet) {
+    padding: $responsive-space-tablet;
+  }
+}
+
+.author-info {
+  @include flex-center(column, start);
+
+  row-gap: $space-sm;
+  margin-bottom: $space-default;
+
+  &>div {
+    text-align: center;
+  }
+
+  img {
+    width: $icon-xxl;
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    transform: scaleX(-1);
+  }
+
+  @include screen(tablet) {
+    flex-direction: row;
+    column-gap: $space-lg;
+
+    &>div {
+      text-align: left;
+    }
+  }
+}
+
+.highlight {
+  @include highlight-text;
+}
+
+.discount-info {
+  p {
+    @include default-text;
+  }
+}
+
+.right-card {
+  color: $color-bg;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: $image-dark-overlay;
+  }
+
+  div {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    margin: 0 $responsive-space-mobile;
+  }
+
+  p {
+    @include default-text(currentColor);
+  }
+
+  @include screen(tablet) {
+    div {
+      margin: 0 $responsive-space-tablet;
+    }
+  }
+}
+
+/*
+---------------
+Travel Section
+---------------
+*/
+
+.travel-suitcases {
+  @include flex-center(column);
+
+  margin: 0 auto $section-spacing-lg;
+
+  @include carousel-wrap;
+}
+
+.carousel {
+  @include flex-center(column);
+
+  padding-top: $space-sm;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  margin-bottom: $space-default;
+}
+
+.inner {
+  display: flex;
+}
+
+.card {
+  position: relative;
+
+  @include carousel-columns;
+
+  box-sizing: border-box;
+  padding: 0 $space-xs;
+  cursor: pointer;
+}
+
+.card-info {
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  transform: translate(0, 0);
+  filter: blur($space-xxl);
+  opacity: 0;
+  padding: 0 $space-xl $space-xxl;
+  color: $color-bg;
+
+  @include carousel-text;
+
+  transition: all $transition-slow;
+}
+
+.card-container {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow $transition-slow;
+  border-radius: $border-radius-sm;
+
+  img {
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    filter: brightness(1);
+    width: 100%;
+    height: 100%;
+    transition: transform $transition-slow, filter $transition-slow;
+  }
+
+  &::after {
+    content: '';
+
+    @include shiny-hover-effect;
+  }
+
+  &:hover {
+    box-shadow: $shadow-md $color-grey;
+    border-radius: $border-radius-sm;
+
+    &::after {
+      transform: skewX(-25deg) translateX(300%);
+    }
+
+    img {
+      transform: scale(1.1);
+      filter: $image-dark-overlay;
+    }
+
+    .card-info {
+      bottom: 0;
+      left: 0;
+      transform: translate(0, 0);
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+}
+
+.title-carousel {
+  font-weight: $font-weight-bold;
+  margin-bottom: $space-default;
+}
+
+.map {
+  button {
+    background: transparent;
+    cursor: pointer;
+    margin: 0 $space-sm;
+    color: $color-grey;
+    position: relative;
+
+    @include icon-hover-effect(1.5);
+  }
+}
+
+/*
+---------------
+Selected Products Section
+---------------
+*/
+
+.selected-products,
+.new-product-arrivals,
+.testimonials {
+  @include content;
+  @include flex-center(column);
+
+  margin: 0 auto $section-spacing-lg;
+  padding: 0 $space-xs;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-default $space-xs;
+
+  @include screen(tablet) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-default;
+  }
+
+  @include screen(desktop) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-sm;
+  }
+
+  @include screen(wide) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/*
+---------------
+Banner
+---------------
+*/
+
+.banner {
+  @include content;
+
+  margin: 0 auto $section-spacing-lg;
+
+  @include flex-center(column-reverse);
+
+  row-gap: $section-spacing-sm;
+  padding: $space-xl $space-md;
+  box-shadow: $shadow-lg $color-shadow;
+  color: $color-bg;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: $container-width-md;
+
+  .video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: $image-dark-overlay;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  @include screen(tablet) {
+    @include flex-center(row, space-between);
+
+    padding: $responsive-space-desktop;
+  }
+}
+
+.video-bg::cue {
+  color: transparent;
+  opacity: 0;
+  background-color: transparent;
+  text-shadow: none;
+}
+
+.jumbo-text {
+  @include jumbo-text;
+}
+
+.left-side,
+.right-side {
+  @include screen(tablet) {
+    flex: 0 0 50%;
+  }
+}
+
+.left-side {
+  text-align: center;
+  padding: 0 $space-md;
+
+  p {
+    text-wrap: wrap;
+  }
+
+  @include screen (tablet) {
+    text-align: left;
+  }
+}
+
+.right-side {
+  text-align: center;
+  text-wrap: balance;
+
+  h2 {
+    margin-bottom: $space-xl;
+  }
+
+  p {
+    @include default-text(currentColor);
+  }
+
+  @include screen (tablet) {
+    text-align: left;
+    padding-left: $responsive-space-desktop;
+  }
+}
+
+/*
+---------------
+Testimonials Section
+---------------
+*/
+
+.testimonials {
+  img {
+    margin-bottom: $space-default;
+  }
+}
+
+.reviews-box {
+  @include flex-center(row, center);
+
+  gap: $space-default;
+  padding: 0 $space-md;
+  flex-wrap: wrap;
+
+  @include screen(desktop) {
+    flex-wrap: nowrap;
+  }
+}
+
+.review-card {
+  @include flex-center(column);
+
+  flex-basis: $card-min-width;
+  text-align: center;
+  background-color: $color-bg;
+  box-shadow: $shadow-lg $color-shadow;
+  padding: $space-xl;
+
+  @include screen(desktop) {
+    flex-basis: 100%;
+  }
+}
+
+.bold-text {
+  color: $color-accent;
+  font-weight: $font-weight-bold;
+  margin-top: $space-default;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY($space-xxl);
+  filter: blur($space-xxs);
+  transition: opacity $transition-slow, transform $transition-slow, filter $transition-slow;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/*
+=============== 
+About Us Page
+===============
+*/
+
+.badges,
+.new-arrivals,
+.team,
+.contact-form {
+  @include content;
+  @include flex-center(column);
+
+  margin: 0 auto $section-spacing-md;
+
+  @include screen(tablet) {
+    margin-bottom: $section-spacing-lg;
+  }
+}
+
+/*
+---------------
+Hero Section
+---------------
+*/
+
+.banner-hero {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: $image-dark-overlay;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+
+.content {
+  @include content;
+
+  margin: 0 auto;
+
+  @include flex-center(column);
+
+  color: $color-bg;
+  text-align: center;
+  padding: $section-spacing-md 0;
+
+  h1 {
+    margin-bottom: $space-default;
+  }
+
+  p {
+    width: $container-width;
+  }
+
+  @include screen(tablet) {
+    padding: clamp($section-spacing-lg, 20vw, calc($section-spacing-md * 2)) 0;
+
+    p {
+      width: $card-lg-width;
+    }
+  }
+
+  @include screen(wide) {
+    padding: calc($section-spacing-md * 2);
+
+    p {
+      width: $card-lg-width;
+    }
+  }
+}
+
+/*
+---------------
+Badges Section
+---------------
+*/
+
+.badges {
+  @include content;
+
+  padding: 0 $space-md;
+
+  img {
+    margin-bottom: $space-lg;
+  }
+}
+
+.badges-wrapper {
+  @include flex-center(row, space-between, self-start);
+
+  row-gap: $space-default;
+  flex-wrap: wrap;
+  width: 100%;
+
+  @include screen(desktop) {
+    gap: 0;
+  }
+}
+
+.badge {
+  @include flex-center(column);
+
+  text-align: center;
+  text-wrap: balance;
+  flex: 0 0 50%;
+
+  p {
+    width: $container-width-md;
+    margin-bottom: $space-default;
+  }
+
+  @include screen(desktop) {
+    flex: 0 0 25%;
+  }
+
+  @include screen(wide) {
+    p {
+      width: 100%;
+    }
+  }
+}
+
+/*
+---------------
+New Arrivals Section
+---------------
+*/
+
+.new-arrivals {
+  @include flex-center(column-reverse);
+
+  gap: $space-default;
+  max-width: $card-lg-width;
+  width: $container-width-md;
+
+  @include screen(tablet) {
+    max-width: $max-width-content;
+    padding: 0 $space-default;
+  }
+
+  @include screen (desktop) {
+    display: grid;
+    max-width: $max-width-content;
+    justify-content: space-between;
+    grid-template-columns: minmax($card-min-width, 1fr) minmax($card-min-width, 1fr);
+    padding: 0;
+  }
+}
+
+.arrivals-info {
+  @include flex-center(column);
+
+  @include screen (tablet) {
+    width: $container-width;
+  }
+
+  @include screen (desktop) {
+    display: block;
+    width: 100%;
+  }
+
+  h2 {
+    margin-bottom: $space-xl;
+  }
+
+  &>p {
+    @include default-text;
+
+    margin-bottom: $space-default;
+    text-wrap: wrap;
+  }
+}
+
+/*
+---------------
+Team Section
+---------------
+*/
+
+.team {
+  h2 {
+    border-bottom: 2px solid $color-accent;
+    margin-bottom: $space-xxl;
+  }
+}
+
+.team-box {
+  @include flex-center(row, center);
+
+  gap: $space-xxl;
+  padding: 0 $space-md;
+  flex-wrap: wrap;
+
+  @include screen(tablet) {
+    gap: $space-xs;
+  }
+
+  @include screen(desktop) {
+    flex-wrap: nowrap;
+  }
+}
+
+.person-card {
+  @include flex-center(column);
+
+  flex-basis: $card-min-width;
+  text-align: center;
+
+  img {
+    margin-bottom: $space-md;
+    border-radius: $border-radius-sm;
+
+    @include screen(tablet) {
+      margin-bottom: $space-default;
+    }
+  }
+
+  @include screen(desktop) {
+    flex-basis: 100%;
+  }
+}
+
+.person-name {
+  font-size: clamp($font-size-text-lg, 2vw, $font-size-h5);
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  margin-bottom: $space-xs;
+}
+
+
+/*
+---------------
+Contact Form Section
+---------------
+*/
+
+.contact-form {
+  @include flex-center(column);
+
+  gap: $space-default;
+  max-width: $card-lg-width;
+  width: $container-width-md;
+
+  @include screen(tablet) {
+    max-width: $max-width-content;
+    padding: 0 $space-default;
+  }
+
+  @include screen (desktop) {
+    max-width: $max-width-content;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+  }
+}
+
+.image-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 5/4;
+
+  @include screen(tablet) {
+    width: $container-width;
+  }
+
+  @include screen(desktop) {
+    width: 100%;
+    aspect-ratio: auto
+  }
+
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.4)
+  }
+}
+
+.contact-info {
+  @include flex-center(column);
+
+  @include screen (tablet) {
+    width: $container-width;
+  }
+
+  @include screen (desktop) {
+    display: block;
+    width: 100%;
+  }
+
+  .form-header {
+    margin-bottom: $space-default;
+    font-family: $font-primary;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-h4;
+    line-height: 1;
+    color: $color-primary;
+  }
+
+  &>p:last-of-type {
+    @include default-text;
+
+    margin-bottom: $space-xxl;
+    text-wrap: wrap;
+  }
+}
+
+img[src$=".svg"] {
+  filter: sepia(0.85) saturate(1.2) contrast(2);
+}
+
+img[src$=".png"] {
+  filter: hue-rotate(190deg) contrast(2) saturate(1.2) brightness(2);
+}
